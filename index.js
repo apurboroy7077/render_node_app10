@@ -16,6 +16,8 @@ let the_server = the_http.createServer((request, response) => {
     file_server("files/typespeed.html", 200, response);
   } else if (request.url == "/calculator") {
     file_server("files/calculator.html", 200, response);
+  } else {
+    file_server("files/index.html", 200, response);
   }
 });
 the_server.listen(the_port, () => {
