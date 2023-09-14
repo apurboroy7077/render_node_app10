@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .container {
+        border: 10px solid black;
+        border-radius: 10px;
+        width: 100%;
+        height: 100vh;
+        background-color: orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .calculator {
+        background-color: #1c1c1c;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      input,
+      button {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        margin: 5px;
+        background-color: transparent;
+        color: white;
+        box-shadow: 5px 5px 5px black;
+      }
+      .input {
+        display: flex;
+      }
+      input {
+        flex: 1;
+        border: 1.5px solid white;
+        text-align: right;
+        font-size: 20px;
+        padding: 15px;
+        letter-spacing: 1px;
+      }
+      .equal {
+        width: 115px;
+      }
+      button:hover {
+        box-shadow: 1px 1px 5px white;
+      }
+      a {
+        text-decoration: none;
+        position: absolute;
+        top: 600px;
+        color: black;
+      }
+      a:hover {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <div class="">
+          <div class="input">
+            <input type="text" />
+          </div>
+          <div class="">
+            <button>9</button>
+            <button>8</button>
+            <button>7</button>
+            <button>+</button>
+          </div>
+          <div class="">
+            <button>6</button>
+            <button>5</button>
+            <button>4</button>
+            <button>-</button>
+          </div>
+          <div class="">
+            <button>3</button>
+            <button>2</button>
+            <button>1</button>
+            <button>/</button>
+          </div>
+          <div class="">
+            <button>0</button>
+            <button>%</button>
+            <button>.</button>
+            <button>*</button>
+          </div>
+          <div class="">
+            <button>AC</button>
+            <button>DE</button>
+            <button class="equal">=</button>
+          </div>
+        </div>
+      </div>
+      <a href="/"><h1>Home</h1></a>
+    </div>
+    <script>
+      let buttons_selector = document.getElementsByTagName("button");
+      let input_selector = document.getElementsByTagName("input")[0];
+      let display_value = "";
+      let array_of_buttons = Array.from(buttons_selector);
+      array_of_buttons.forEach((button) => {
+        button.addEventListener("click", (the_event) => {
+          try {
+            let button_value = the_event.currentTarget.innerHTML;
+            if (button_value == "=") {
+              display_value = eval(display_value);
+              input_selector.value = display_value;
+            } else if (button_value == "AC") {
+              display_value = "";
+              input_selector.value = display_value;
+            } else if (button_value == "DE") {
+              display_value = display_value.toString();
+              display_value = display_value.slice(0, -1);
+              input_selector.value = display_value;
+            } else {
+              display_value = display_value + button_value;
+              input_selector.value = display_value;
+            }
+          } catch (error) {
+            let error_message = "Invalid Input";
+            input_selector.value = error_message;
+            console.log(error);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
